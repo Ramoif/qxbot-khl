@@ -11,7 +11,7 @@ import qx_card
 from khl import *
 from khl.card import CardMessage, Card, Module, Element, Types, Struct
 from random import randint
-from tools import bili
+# from tools import bili
 
 # loading config and setting bot
 with open('/www/wwwpy/config/config.json', 'r', encoding='utf-8') as f:
@@ -66,10 +66,10 @@ async def card_daily(msg: Message):
 
 
 # live
-@bot.command(name='yy')
-async def xll_live(msg: Message):
-    card = await qx_card.get_live_card()
-    await msg.ctx.channel.send(card)
+# @bot.command(name='yy')
+# async def xll_live(msg: Message):
+#     card = await qx_card.get_live_card()
+#     await msg.ctx.channel.send(card)
 
 
 @bot.on_event(EventTypes.ADDED_REACTION)
