@@ -11,6 +11,7 @@ import qx_card
 from khl import *
 from khl.card import CardMessage, Card, Module, Element, Types, Struct
 from random import randint
+from tools import bili
 
 # loading config and setting bot
 with open('/www/wwwpy/config/config.json', 'r', encoding='utf-8') as f:
@@ -58,10 +59,17 @@ plan:
 
 
 #  '/dd': 手动发公告
-@bot.command('dd')
+@bot.command('ff')
 async def card_daily(msg: Message):
-    cm = qx_card.get_info_card()
-    await msg.ctx.channel.send(cm)
+    card = qx_card.get_info_card()
+    await msg.ctx.channel.send(card)
+
+
+# live
+@bot.command(name='yy')
+async def xll_live(msg: Message):
+    card = await qx_card.get_live_card()
+    await msg.ctx.channel.send(card)
 
 
 @bot.on_event(EventTypes.ADDED_REACTION)
@@ -88,7 +96,6 @@ async def status_music(msg: Message, music: str = 'チキチキバンバン', si
         # await msg.reply(f"access successfully")
     else:
         await msg.reply(f"无效的操作。")
-
 
 
 # delete bot status  删除指定状态
@@ -145,7 +152,6 @@ async def test_game_state(msg: Message):
     await msg.reply(game_json)
 
 
-# 23.7.31 Test
 # 这是一个自定义规则, 用来判断是否msg和keyword相同
 def is_contains(keyword: str):
     def func(msg: Message):
@@ -171,6 +177,7 @@ async def test_decorator(msg: Message):
         await msg.reply(f"invalid access")
 
 
+# 回应操作反馈
 @bot.on_event(EventTypes.ADDED_REACTION)
 async def reaction_reminder(b: Bot, event: Event):
     print(event.body)
@@ -182,7 +189,8 @@ async def reaction_reminder(b: Bot, event: Event):
 
     # send a message to inform user at current channel
     # only visible to `event.body['user_id']`
-    await b.client.send(channel, f"你回应了{event.body['emoji']['id']}(此消息仅你可见)", temp_target_id=event.body['user_id'])
+    await b.client.send(channel, f"你回应了{event.body['emoji']['id']}(此消息仅你可见)",
+                        temp_target_id=event.body['user_id'])
 
 
 # starting bot
